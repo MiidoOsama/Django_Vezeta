@@ -19,7 +19,7 @@ class Profile(models.Model):
     address= models.CharField(_("المحافظة"), max_length=50)
     address_detail = models.CharField(_("العنوان "), max_length=80)
     waiting_time = models.IntegerField(_("مدة الانتظار") , blank=True , null= True)
-    working_hours = models.IntegerField(_("ساعات العمل "))
+    working_hours = models.IntegerField(_("ساعات العمل ") , blank=True , null=True)
     number_phone = models.CharField(_("رقم التليفون  ") , max_length=20)
     class Meta:
         """Meta definition for Profile."""
@@ -32,10 +32,10 @@ class Profile(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.name)
+            self.slug = slugify(self.user.username)
         super(Profile, self).save(*args, **kwargs)
 
 def created_profile (sender , **kwargs):
-    Profile.objects.create(user=kwargs['instance'])
+    Profile.objects.create(user=kwargs['instance'] )
 
 post_save.connect(created_profile, sender=User)
