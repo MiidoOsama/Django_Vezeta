@@ -21,6 +21,9 @@ class Profile(models.Model):
     waiting_time = models.IntegerField(_("مدة الانتظار") , blank=True , null= True)
     working_hours = models.IntegerField(_("ساعات العمل ") , blank=True , null=True)
     number_phone = models.CharField(_("رقم التليفون  ") , max_length=20)
+    facebook = models.CharField(max_length=100, blank=True , null=True)
+    twitter = models.CharField(max_length=100, blank=True , null=True)
+    google = models.CharField(max_length=100, blank=True , null=True)
     class Meta:
         """Meta definition for Profile."""
 
