@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from .models import Profile
 from .forms import Login_Form , UserCreationForm
 from django.contrib.auth import authenticate , login
-
+from django.contrib.auth.decorators import login_required
 
 def doctors_list (request):
     doctors = User.objects.all()
@@ -54,3 +54,7 @@ def signup (request):
         'form' : form
     }
     return render (request , 'user/signup.html' , context)
+
+@login_required()
+def myprofile(request):
+    return render(request , 'user/myprofile.html' , {})
